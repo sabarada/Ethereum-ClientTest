@@ -1,4 +1,4 @@
-# EthereumJSONRPCWithJavaEx
+# Ethereum JSON RPC With Java
 
 ## Simple Ethereum Json-RPC With Java Spring
 
@@ -8,4 +8,4 @@ You Can see the Ethereum json-rpc doc [here](https://github.com/ethereum/wiki/wi
 - JDK 8
 - Spring
 - Maven
-- Geth
+- [Geth](https://geth.ethereum.org/downloads/)
