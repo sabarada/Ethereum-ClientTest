@@ -11,7 +11,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
   
-  <groupId>com.deleo</groupId>
+  <groupId>com</groupId>
   <artifactId>BlockChainService</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>BlockChainService</name>
