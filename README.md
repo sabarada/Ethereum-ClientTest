@@ -1,6 +1,6 @@
-# Ethereum JSON RPC With Java
+# Ethereum JSON-RPC, Did not use the web3j With Java 
 
-## Simple Ethereum Json-RPC With Java Spring (didn`t use the web3j)
+## Simple Ethereum Json-RPC With Java Spring
 
 You Can see the Ethereum json-rpc doc [here](https://github.com/ethereum/wiki/wiki/JSON-RPC)
 
@@ -11,4 +11,5 @@ You Can see the Ethereum json-rpc doc [here](https://github.com/ethereum/wiki/wi
 - [Geth](https://geth.ethereum.org/downloads/)
 
 
-## You Can just see the [code](./src/test/java/org/BlockChainService/service/GethwithmavenApplicationTests.java) and try It!
+## Look
+You Can just see the [code](./src/test/java/org/BlockChainService/service/GethwithmavenApplicationTests.java) and try It!
