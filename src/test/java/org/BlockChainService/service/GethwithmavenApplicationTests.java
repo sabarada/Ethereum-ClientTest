@@ -1,94 +1,99 @@
 package org.BlockChainService.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.web3j.utils.Convert.toWei;
 
 import java.io.IOException;
+import java.util.Collections;
 
+import org.BlockChainService.domain.test.dto.GethInputVO;
 import org.BlockChainService.domain.test.dto.GethResultVO;
 import org.BlockChainService.domain.test.dto.GethResultVO_Event;
-import org.BlockChainService.domain.test.service.BlockChainService;
+import org.BlockChainService.domain.test.dto.Transaction;
+import org.BlockChainService.domain.test.service.HttpService;
+import org.assertj.core.util.Arrays;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.web3j.utils.Convert;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class GethwithmavenApplicationTests {
 
     @Autowired
-    private BlockChainService web3jSampleService;
-    private static Logger logger = LoggerFactory.getLogger(GethwithmavenApplicationTests.class);
+    private HttpService web3jSampleService;
+       
     
+    //"{\"jsonrpc\":\"2.0\",\"method\":\"web3_clientVersion\",\"params\":[],\"id\":67}";
     @Test
-    public void testGetClientVersion() throws IOException {
-    	String JSONInput = "{\"jsonrpc\":\"2.0\",\"method\":\"web3_clientVersion\",\"params\":[],\"id\":67}";
+    public void testGetClientVersion() throws IOException {        
+    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("web3_clientVersion", Collections.<String>emptyList(), GethResultVO.class);
+    	System.out.println(web3jSampleService.callGethFunction(web3jSampleService.getJsonString(gethInputVO), GethResultVO.class));
+    }
+
+    //"{\"jsonrpc\": \"2.0\", \"method\":\"eth_accounts\", \"params\":[], \"id\":1 }";
+    @Test
+    public void getAccount() throws JsonProcessingException {
+    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("eth_accounts", Collections.<String>emptyList(), GethResultVO.class);
+    	System.out.println(web3jSampleService.callGethFunction(web3jSampleService.getJsonString(gethInputVO), GethResultVO.class));
+    }
+
+	//  "{\n" +
+	//  "    \"jsonrpc\": \"2.0\", \n" +
+	//  "    \"method\" : \"personal_unlockAccount\", \n" +
+	//  "    \"params\"  : [\n" +
+	//  "       \"" + account + "\", \n" +
+	//  "       \""+ passwd + "\", \n" +
+	//  "       0\n" +
+	//  "    ], \n" +
+	//  "    \"id\" : 67 \n" +
+	//  "} ";
+    @Test
+    public void unlockAccount() throws JsonProcessingException {
+    	String account = "";
+    	String passwd = "";
+        
+    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("personal_unlockAccount", java.util.Arrays.asList(account, passwd), GethResultVO.class);
+    	String JSONInput = web3jSampleService.getJsonString(gethInputVO);
+        web3jSampleService.callGethFunction(JSONInput, GethResultVO.class);
+    }
+
+	//  "{\n" +
+	//  "    \"jsonrpc\": \"2.0\", \n" +
+	//  "    \"method\" : \"eth_sendTransaction\", \n" +
+	//  "    \"params\"  : [{ \n" +
+	//  "       \"from\"       : \"" + from + "\", \n" +
+	//  "       \"to\"         : \"" + to + "\", \n" +
+	//  "       \"gas\"        : \"" + gas + "\", \n" +
+	//  "       \"gasPrice\"   : \"" + gasPrice + "\", \n" +
+	//  "       \"value\"      : \"" + value + "\" \n" +
+	//  "    }], \n" +
+	//  "    \"id\" : 1 \n" +
+	//  "} ";
+    @Test
+    public void sendTransaction() throws JsonProcessingException {
+    	System.out.println("-----------------------sendTransaction------------------");
+        String from = "0x7d324dbc8fc704881d302da3b264e2243007bdba";
+        String to = "0x93b80734c3d1263c787d4869240f4912909c4807";
+        String gas = "0x" + toWei("90000", Convert.Unit.WEI).toBigInteger().toString(16);
+        String gasPrice = "0x" + toWei("20000000000", Convert.Unit.WEI).toBigInteger().toString(16);
+        String value = "0x" +  toWei("1", Convert.Unit.ETHER).toBigInteger().toString(16);
+        
+        Transaction transaction = new Transaction(from, to, gas, gasPrice, value);
+        
+        GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("eth_sendTransaction", java.util.Arrays.asList(transaction), GethResultVO.class);
+    	String JSONInput = web3jSampleService.getJsonString(gethInputVO);
+    
         System.out.println(web3jSampleService.callGethFunction(JSONInput, GethResultVO.class));
     }
 
     @Test
-    public void getAccount() {
-        String JSONInput = "{\"jsonrpc\": \"2.0\", \"method\":\"eth_accounts\", \"params\":[], \"id\":1 }";
-        web3jSampleService.callGethFunction(JSONInput, GethResultVO.class);
-    }
-
-    @Test
-    public void unlockAccount() {
-    	System.out.println("-----------------------unlockAccount_Test------------------");
-        String account = "0x7d324dbc8fc704881d302da3b264e2243007bdba";
-    	String passwd = "sabarada_1";
-        
-        String JSONInput = "{\n" +
-                "    \"jsonrpc\": \"2.0\", \n" +
-                "    \"method\" : \"personal_unlockAccount\", \n" +
-                "    \"params\"  : [\n" +
-                "       \"" + account + "\", \n" +
-                "       \""+ passwd + "\", \n" +
-                "       0\n" +
-                "    ], \n" +
-                "    \"id\" : 67 \n" +
-                "} ";
-
-        System.out.println(JSONInput);
-        web3jSampleService.callGethFunction(JSONInput, GethResultVO.class);
-    }
-
-    @Test
-    public void sendTransaction() {
-    	System.out.println("-----------------------sendTransaction------------------");
-        String from = "0x8bb666d92c17f586793a8d0cfbb1ad2f31470002";
-        String to = "0xd1cf8b394f1c85195ec5d54e63ea2656c40bb67e";
-
-        String gas = "0x" + toWei("90000", Convert.Unit.WEI).toBigInteger().toString(16);
-        String gasPrice = "0x" + toWei("20000000000", Convert.Unit.WEI).toBigInteger().toString(16);
-        String value = "0x" +  toWei("1", Convert.Unit.ETHER).toBigInteger().toString(16);
-
-        String JSONInput = "{\n" +
-                "    \"jsonrpc\": \"2.0\", \n" +
-                "    \"method\" : \"eth_sendTransaction\", \n" +
-                "    \"params\"  : [{ \n" +
-                "       \"from\"       : \"" + from + "\", \n" +
-                "       \"to\"         : \"" + to + "\", \n" +
-                "       \"gas\"        : \"" + gas + "\", \n" +
-                "       \"gasPrice\"   : \"" + gasPrice + "\", \n" +
-                "       \"value\"      : \"" + value + "\" \n" +
-                "    }], \n" +
-                "    \"id\" : 1 \n" +
-                "} ";
-
-        System.out.println(JSONInput);
-        web3jSampleService.callGethFunction(JSONInput, GethResultVO.class);
-    }
-
-    @Test
     public void minerStart() {
-    	System.out.println("-----------------------minerStart------------------");
-        String JSONInput = "{\n" +
+    	String JSONInput = "{\n" +
                 "    \"jsonrpc\": \"2.0\", \n" +
                 "    \"method\" : \"miner_start\", \n" +
                 "    \"params\"  : [], \n" +
@@ -101,8 +106,7 @@ public class GethwithmavenApplicationTests {
 
     @Test
     public void minerStop() {
-    	System.out.println("-----------------------minerStop------------------");
-        String JSONInput = "{\n" +
+    	String JSONInput = "{\n" +
                 "    \"jsonrpc\": \"2.0\", \n" +
                 "    \"method\" : \"miner_stop\", \n" +
                 "    \"params\"  : [], \n" +

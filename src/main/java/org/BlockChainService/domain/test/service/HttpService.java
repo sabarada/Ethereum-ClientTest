@@ -1,12 +1,16 @@
 package org.BlockChainService.domain.test.service;
 
-import javax.validation.constraints.NotNull;
-
+import org.BlockChainService.domain.test.dto.GethInputVO;
+import org.BlockChainService.domain.test.dto.GethResultInterface;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.web3j.protocol.ObjectMapperFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -15,10 +19,25 @@ import org.springframework.web.client.RestTemplate;
  * The JSON-RPC client event Service.
  */
 @Service
-public class BlockChainService {
+public class HttpService {
 
 	
 	private static final String LOCAL = "http://127.0.0.1:8545";
+	private final ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
+	
+	
+	/**
+	 * ObjectInputData to JsonString
+	 * @param gethInputVO is Object InputData
+	 * @return JsonString
+	 * @throws JsonProcessingException
+	 */
+	public String getJsonString(GethInputVO<?, GethResultInterface> gethInputVO) throws JsonProcessingException
+	{
+		String payload = objectMapper.writeValueAsString(gethInputVO);
+		System.out.println(payload);
+		return payload;
+	}
 	
 	/**
 	 * service to communicate with ethereum
@@ -27,13 +46,11 @@ public class BlockChainService {
 	 * @param classes decide result format.
 	 * @return json data transferred from ethereum
 	 */
-	@SuppressWarnings("unchecked")
 	public <T> T callGethFunction(String JSONInput, Class<T> classes) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     
-    @SuppressWarnings("rawtypes")
-	HttpEntity param= new HttpEntity(JSONInput, headers);
+	HttpEntity<String> param= new HttpEntity<String>(JSONInput, headers);
     
     RestTemplate restTemplate = new RestTemplate();
     return (T) restTemplate.postForObject(LOCAL, param, classes);

@@ -3,7 +3,7 @@ package org.BlockChainService.domain.test.dto;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GethResultVO {
+public class GethResultVO implements GethResultInterface{
 
     private String jsonrpc;
     private String id;
