@@ -32,7 +32,7 @@ public class HttpService {
 	 * @return JsonString
 	 * @throws JsonProcessingException
 	 */
-	public String getJsonString(GethInputVO<?, GethResultInterface> gethInputVO) throws JsonProcessingException
+	public String getJsonString(GethInputVO<?, ?> gethInputVO) throws JsonProcessingException
 	{
 		String payload = objectMapper.writeValueAsString(gethInputVO);
 		System.out.println(payload);
