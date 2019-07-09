@@ -30,12 +30,15 @@ public class Transaction {
 	}
     
     public Transaction(String from, String to, String gas, String gasPrice, String value) {
-		this.from = from;
-		this.to = to;
-		this.gas = gas;
-		this.gasPrice = gasPrice;
-		this.value = value;
+		this(from, to, gas, gasPrice, value, null, null);
 	}
+    
+    public Transaction(String from, String to, String value)
+    {
+    	this(from, to, null, null, value);
+    }
+    
+    
     
 	public String getFrom() {
 		return from;
