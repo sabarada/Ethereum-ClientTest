@@ -12,6 +12,7 @@ import org.BlockChainService.domain.test.dto.GethResultVO_Event;
 import org.BlockChainService.domain.test.dto.Transaction;
 import org.BlockChainService.domain.test.service.HttpService;
 import org.assertj.core.util.Arrays;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GethwithmavenApplicationTests {
+public abstract class GethClientTests {
 
     @Autowired
     private HttpService web3jSampleService;
-       
     
     //{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}
     @Test
@@ -40,7 +40,7 @@ public class GethwithmavenApplicationTests {
     @Test
     public void getAccount() throws JsonProcessingException {
     	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("eth_accounts", Collections.<String>emptyList(), GethResultVO.class);
-    	System.out.println(web3jSampleService.callGethFunction(web3jSampleService.getJsonString(gethInputVO), GethResultVO.class));
+    	System.out.println(web3jSampleService.callGethFunction(web3jSampleService.getJsonString(gethInputVO), gethInputVO.getResponseType()));
     }
 
 	//{ "jsonrpc": "2.0", "method" : "personal_unlockAccount", "params"  : [ account, passwd ], "id" : 67 }

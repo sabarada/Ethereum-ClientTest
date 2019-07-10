@@ -9,12 +9,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Filter{
 	
-	private Filter thisObj;
-	private List<FilterTopic> topics;
+	private List<FilterTopic<?>> topics;
 	
 	public Filter()
 	{
-		this.thisObj = this;
 		topics = new ArrayList<>();
 	}
 	
@@ -38,7 +36,7 @@ public class Filter{
 	
 	//public T addOptionalTopics
 	
-	public List<FilterTopic> getTopics()
+	public List<FilterTopic<?>> getTopics()
 	{
 		return topics;
 	}
