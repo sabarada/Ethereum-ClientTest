@@ -23,21 +23,6 @@ public class HttpService {
 
 	
 	private static final String LOCAL = "http://127.0.0.1:8545";
-	private final ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
-	
-	
-	/**
-	 * ObjectInputData to JsonString
-	 * @param gethInputVO is Object InputData
-	 * @return JsonString
-	 * @throws JsonProcessingException
-	 */
-	public String getJsonString(GethInputVO<?, ?> gethInputVO) throws JsonProcessingException
-	{
-		String payload = objectMapper.writeValueAsString(gethInputVO);
-		System.out.println(payload);
-		return payload;
-	}
 	
 	/**
 	 * service to communicate with ethereum

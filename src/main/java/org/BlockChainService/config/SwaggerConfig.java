@@ -22,7 +22,7 @@ public class SwaggerConfig {
 	{
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("org.BlockChainService.domain.test.controller"))
+				.apis(RequestHandlerSelectors.basePackage("org.BlockChainService.domain"))
 				.paths(PathSelectors.any())
 				.build();
 	}
