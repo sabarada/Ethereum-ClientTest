@@ -3,8 +3,8 @@ package org.BlockChainService.service;
 import java.io.IOException;
 import java.util.Collections;
 
-import org.BlockChainService.domain.test.dto.GethInputVO;
-import org.BlockChainService.domain.test.dto.GethResultVO;
+import org.BlockChainService.domain.dto.GethInputVO;
+import org.BlockChainService.domain.dto.GethResultVO;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

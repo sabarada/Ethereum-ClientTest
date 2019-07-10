@@ -2,9 +2,9 @@ package org.BlockChainService.service;
 
 import java.io.IOException;
 
-import org.BlockChainService.domain.test.dto.Filter;
-import org.BlockChainService.domain.test.dto.GethInputVO;
-import org.BlockChainService.domain.test.dto.GethResultVO_Event;
+import org.BlockChainService.domain.dto.Filter;
+import org.BlockChainService.domain.dto.GethInputVO;
+import org.BlockChainService.domain.dto.GethResultVO_Event;
 import org.junit.Test;
 
 public class FilterAndLogTest extends GethClientTest{

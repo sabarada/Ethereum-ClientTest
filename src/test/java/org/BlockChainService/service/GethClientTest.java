@@ -1,7 +1,8 @@
 package org.BlockChainService.service;
 
-import org.BlockChainService.domain.test.dto.GethInputVO;
-import org.BlockChainService.domain.test.service.HttpService;
+import org.BlockChainService.domain.dto.GethInputVO;
+import org.BlockChainService.domain.service.HttpService;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,11 +15,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest
 public abstract class GethClientTest {
 
-    @Autowired
     protected HttpService web3jSampleService;
     
-    @Autowired
-    protected ObjectMapper objectMapper = new ObjectMapper();
+    protected ObjectMapper objectMapper;
+    
+    @Before
+    public void setup()
+    {
+    	web3jSampleService = new HttpService();
+    	objectMapper = new ObjectMapper();
+    }
     
     
     public <T> T send(GethInputVO<?, ?> input, Class<T> type)
@@ -27,8 +33,8 @@ public abstract class GethClientTest {
     	
 		try {
 			JSONInput = objectMapper.writeValueAsString(input);
+			System.out.println(JSONInput);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return (T)(web3jSampleService.callGethFunction(JSONInput, type));
