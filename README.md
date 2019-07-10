@@ -4,11 +4,21 @@
 
 You Can see the Ethereum json-rpc doc [here](https://github.com/ethereum/wiki/wiki/JSON-RPC)
 
-## Required
+## Uses Tool
+
+### Java Client
 - JDK 8
 - Spring
 - Maven
-- [Geth](https://geth.ethereum.org/downloads/)
+- Swagger
+
+### Block Chain
+- [Geth](https://geth.ethereum.org/downloads
+
+### Smart Contract
+- truffle
+- [ganache-cli](https://github.com/trufflesuite/ganache-cli)
+   
 
 
 ## Look
