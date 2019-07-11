@@ -2,8 +2,8 @@ package org.BlockChainService.domain.service;
 
 import java.util.Collections;
 
-import org.BlockChainService.domain.dto.GethInputVO;
-import org.BlockChainService.domain.dto.GethResultVO;
+import org.BlockChainService.domain.dto.EthInputVO;
+import org.BlockChainService.domain.dto.EthResultVO;
 import org.BlockChainService.domain.utils.CommonUtils;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +20,8 @@ public class EthereumService extends HttpService{
 	 */
 	public String getVersion()
 	{
-		GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("web3_clientVersion", Collections.<String>emptyList(), GethResultVO.class);
-		return callGethFunction(CommonUtils.getJsonString(gethInputVO), GethResultVO.class).getResult();
+		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("web3_clientVersion", Collections.<String>emptyList(), EthResultVO.class);
+		return callGethFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult();
 	}
 	
 }

@@ -3,7 +3,7 @@ package org.BlockChainService.domain.dto;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class GethInputVO <S, T extends GethResultInterface>{
+public class EthInputVO <S, T extends EthResultInterface>{
 
 	private static AtomicLong nextId = new AtomicLong(0);
 	
@@ -14,12 +14,12 @@ public class GethInputVO <S, T extends GethResultInterface>{
 	
 	private Class<T> responseType;
 	
-	public GethInputVO()
+	public EthInputVO()
 	{
 		
 	}
 
-	public GethInputVO(String method, List<S> params, Class<T> responseType) {
+	public EthInputVO(String method, List<S> params, Class<T> responseType) {
 		this.method = method;
 		this.params = params;
 		this.id = nextId.getAndIncrement();
@@ -31,7 +31,7 @@ public class GethInputVO <S, T extends GethResultInterface>{
 	}
 
 	public static void setNextId(AtomicLong nextId) {
-		GethInputVO.nextId = nextId;
+		EthInputVO.nextId = nextId;
 	}
 
 	public String getJsonrpc() {

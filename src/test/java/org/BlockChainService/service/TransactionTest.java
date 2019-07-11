@@ -2,14 +2,20 @@ package org.BlockChainService.service;
 
 import static org.web3j.utils.Convert.toWei;
 
-import org.BlockChainService.domain.dto.GethInputVO;
-import org.BlockChainService.domain.dto.GethResultVO;
+import org.BlockChainService.domain.dto.EthInputVO;
+import org.BlockChainService.domain.dto.EthResultVO;
 import org.BlockChainService.domain.dto.Transaction;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.web3j.utils.Convert;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class TransactionTest extends GethClientTest{
 
 	//{"jsonrpc": "2.0", "method" : "eth_sendTransaction", "params"  : [{ "from" : from, "to" : to, "gas" : gas, "gasPrice" : gasPrice, "value" : value}], "id" : 1|
@@ -29,7 +35,7 @@ public class TransactionTest extends GethClientTest{
         							.addvalue(value)
         							.build();
         
-        GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("eth_sendTransaction", java.util.Arrays.asList(transaction), GethResultVO.class);
+        EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_sendTransaction", java.util.Arrays.asList(transaction), EthResultVO.class);
         
         send(gethInputVO, TransactionTest.class);
     	
@@ -49,7 +55,7 @@ public class TransactionTest extends GethClientTest{
 									.addData(data)
 									.build();
     	
-    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("eth_call", java.util.Arrays.asList(transaction, "latest"), GethResultVO.class);
-    	send(gethInputVO, GethResultVO.class);
+    	EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_call", java.util.Arrays.asList(transaction, "latest"), EthResultVO.class);
+    	send(gethInputVO, EthResultVO.class);
     }
 }

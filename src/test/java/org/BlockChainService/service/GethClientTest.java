@@ -1,6 +1,6 @@
 package org.BlockChainService.service;
 
-import org.BlockChainService.domain.dto.GethInputVO;
+import org.BlockChainService.domain.dto.EthInputVO;
 import org.BlockChainService.domain.service.HttpService;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ public abstract class GethClientTest {
     }
     
     
-    public <T> T send(GethInputVO<?, ?> input, Class<T> type)
+    public <T> T send(EthInputVO<?, ?> input, Class<T> type)
     {
     	String JSONInput = null;
     	

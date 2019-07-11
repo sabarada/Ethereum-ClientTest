@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GethResultVO_Event implements GethResultInterface{
+public class EthResultVO_Event implements EthResultInterface{
 
     private String jsonrpc;
     private String id;

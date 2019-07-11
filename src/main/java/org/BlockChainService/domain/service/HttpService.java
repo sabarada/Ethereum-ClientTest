@@ -1,7 +1,7 @@
 package org.BlockChainService.domain.service;
 
-import org.BlockChainService.domain.dto.GethInputVO;
-import org.BlockChainService.domain.dto.GethResultInterface;
+import org.BlockChainService.domain.dto.EthInputVO;
+import org.BlockChainService.domain.dto.EthResultInterface;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

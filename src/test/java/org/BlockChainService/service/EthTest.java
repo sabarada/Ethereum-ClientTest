@@ -3,26 +3,31 @@ package org.BlockChainService.service;
 import java.io.IOException;
 import java.util.Collections;
 
-import org.BlockChainService.domain.dto.GethInputVO;
-import org.BlockChainService.domain.dto.GethResultVO;
+import org.BlockChainService.domain.dto.EthInputVO;
+import org.BlockChainService.domain.dto.EthResultVO;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class EthTest extends GethClientTest{
 	
 	//{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}
     @Test
     public void testGetClientVersion() throws IOException {        
-    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("web3_clientVersion", Collections.<String>emptyList(), GethResultVO.class);
-    	send(gethInputVO, GethResultVO.class);
+    	EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("web3_clientVersion", Collections.<String>emptyList(), EthResultVO.class);
+    	send(gethInputVO, EthResultVO.class);
     }
 
     //{"jsonrpc": "2.0", "method":"eth_accounts", "params":[], "id":1 }
     @Test
     public void getAccount() throws JsonProcessingException {
-    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("eth_accounts", Collections.<String>emptyList(), GethResultVO.class);
-    	send(gethInputVO, GethResultVO.class);
+    	EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_accounts", Collections.<String>emptyList(), EthResultVO.class);
+    	send(gethInputVO, EthResultVO.class);
     }
 
 	//{ "jsonrpc": "2.0", "method" : "personal_unlockAccount", "params"  : [ account, passwd ], "id" : 67 }
@@ -31,22 +36,22 @@ public class EthTest extends GethClientTest{
     	String account = "";
     	String passwd = "";
         
-    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("personal_unlockAccount", java.util.Arrays.asList(account, passwd), GethResultVO.class);
-    	send(gethInputVO, GethResultVO.class);
+    	EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("personal_unlockAccount", java.util.Arrays.asList(account, passwd), EthResultVO.class);
+    	send(gethInputVO, EthResultVO.class);
     }
 
   //{"jsonrpc": "2.0", "method" : "miner_start", "params"  : [], "id" : 74}
     @Test
     public void minerStart() throws JsonProcessingException {
-    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("miner_start", Collections.<String>emptyList(), GethResultVO.class);
-    	send(gethInputVO, GethResultVO.class);
+    	EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("miner_start", Collections.<String>emptyList(), EthResultVO.class);
+    	send(gethInputVO, EthResultVO.class);
     }
     
     //{"jsonrpc": "2.0", "method" : "miner_stop", "params"  : [], "id" : 74}
     @Test
     public void minerStop() throws JsonProcessingException {
-    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("miner_stop", Collections.<String>emptyList(), GethResultVO.class);
-    	send(gethInputVO, GethResultVO.class);   
+    	EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("miner_stop", Collections.<String>emptyList(), EthResultVO.class);
+    	send(gethInputVO, EthResultVO.class);   
     }
 
 
@@ -55,8 +60,8 @@ public class EthTest extends GethClientTest{
     public void getBalance() throws JsonProcessingException {
     	String account = "0x8bb666d92c17f586793a8d0cfbb1ad2f31470002";
     	
-    	GethInputVO<?, GethResultVO> gethInputVO = new GethInputVO<>("eth_getBalance", java.util.Arrays.asList(account, "latest"), GethResultVO.class);
-    	send(gethInputVO, GethResultVO.class);
+    	EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_getBalance", java.util.Arrays.asList(account, "latest"), EthResultVO.class);
+    	send(gethInputVO, EthResultVO.class);
         
     	//System.out.println(account + "'s balance is " + Convert.fromWei(String.valueOf(Hex2Decimal.hex2Decimal(result.getResult().substring(2))), Convert.Unit.ETHER));
     }

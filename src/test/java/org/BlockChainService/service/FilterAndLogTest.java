@@ -3,10 +3,16 @@ package org.BlockChainService.service;
 import java.io.IOException;
 
 import org.BlockChainService.domain.dto.Filter;
-import org.BlockChainService.domain.dto.GethInputVO;
-import org.BlockChainService.domain.dto.GethResultVO_Event;
+import org.BlockChainService.domain.dto.EthInputVO;
+import org.BlockChainService.domain.dto.EthResultVO_Event;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class FilterAndLogTest extends GethClientTest{
 
 	//{"jsonrpc":"2.0","method":"eth_newFilter","params":["topics":topics]"id":7}
@@ -15,8 +21,8 @@ public class FilterAndLogTest extends GethClientTest{
     {
     	String topicAddress = "";
 	    Filter filter = new Filter().addSingleTopic(topicAddress);
-	    GethInputVO<?, GethResultVO_Event> gethInputVO = new GethInputVO<>("eth_newFilter", java.util.Arrays.asList(filter), GethResultVO_Event.class);
-    	send(gethInputVO, GethResultVO_Event.class);
+	    EthInputVO<?, EthResultVO_Event> gethInputVO = new EthInputVO<>("eth_newFilter", java.util.Arrays.asList(filter), EthResultVO_Event.class);
+    	send(gethInputVO, EthResultVO_Event.class);
     }
     
     //{"jsonrpc":"2.0","method":"eth_getFilterChanges","params":[filterID],"id":73}
@@ -25,7 +31,7 @@ public class FilterAndLogTest extends GethClientTest{
     {
     	String filterID = "";
     
-    	GethInputVO<?, GethResultVO_Event> gethInputVO = new GethInputVO<>("eth_newFilter", java.util.Arrays.asList(filterID), GethResultVO_Event.class);
+    	EthInputVO<?, EthResultVO_Event> gethInputVO = new EthInputVO<>("eth_newFilter", java.util.Arrays.asList(filterID), EthResultVO_Event.class);
     	// is Working
     }
 	
