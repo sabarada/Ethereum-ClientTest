@@ -1,4 +1,6 @@
-# Ethereum JSON-RPC, Did not use the web3j With Java 
+# Ethereum JSON-RPC, Did not use the web3j when communicate smart contract
+
+this project is
 
 ## Simple Ethereum Json-RPC With Java Spring
 
