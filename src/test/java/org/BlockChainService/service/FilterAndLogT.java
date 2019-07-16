@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FilterAndLogTest extends GethClientTest{
+public class FilterAndLogT extends GethClientT{
 
 	//{"jsonrpc":"2.0","method":"eth_newFilter","params":["topics":topics]"id":7}
     @Test

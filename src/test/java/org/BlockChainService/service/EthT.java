@@ -14,7 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EthTest extends GethClientTest{
+public class EthT extends GethClientT{
 	
 	//{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}
     @Test

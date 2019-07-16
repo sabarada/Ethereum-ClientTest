@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public abstract class GethClientTest {
+public abstract class GethClientT {
 
     protected HttpService web3jSampleService;
     

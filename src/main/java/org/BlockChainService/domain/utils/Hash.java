@@ -1,4 +1,4 @@
-package org.BlockChainService.domain.dto;
+package org.BlockChainService.domain.utils;
 
 import org.bouncycastle.jcajce.provider.digest.Keccak;
 

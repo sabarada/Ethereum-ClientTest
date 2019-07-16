@@ -7,6 +7,8 @@ public class CommonUtils {
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 	
+	private CommonUtils() {}
+	
 	/**
 	 * Convert ObjectInputData to JsonString
 	 * @param gethInputVO is Object InputData
@@ -22,5 +24,26 @@ public class CommonUtils {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @param input
+	 * @param offset
+	 * @param length
+	 * @param withPrefix
+	 * @return
+	 */
+	public static String toHexString(byte[] input, int offset, int length, boolean withPrefix)
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		if(withPrefix) stringBuilder.append("0x");
+		
+		for(int i = offset; i < offset + length; i++)
+		{
+			stringBuilder.append(String.format("%02x", input[i] & 0xff));
+		}
+		
+		return stringBuilder.toString();
 	}
 }
