@@ -1,4 +1,8 @@
-# Ethereum JSON-RPC, Did not use the web3j With Java 
+# Ethereum JSON-RPC, Did not use the web3j when communicate smart contract
+
+I think web3j is a good project. However, this library is difficult for beginners to use.
+So I have developed a project that makes the web3j project a little easier to access. 
+If you use this project before using web3j, you can use web3j more easily.
 
 ## Simple Ethereum Json-RPC With Java Spring
 
