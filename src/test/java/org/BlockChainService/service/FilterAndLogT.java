@@ -31,7 +31,7 @@ public class FilterAndLogT extends GethClientT{
     {
     	String filterID = "";
     
-    	EthInputVO<?, EthResultVO_Event> gethInputVO = new EthInputVO<>("eth_newFilter", java.util.Arrays.asList(filterID), EthResultVO_Event.class);
+    	EthInputVO<?, EthResultVO_Event> gethInputVO = new EthInputVO<>("eth_getFilterChanges", java.util.Arrays.asList(filterID), EthResultVO_Event.class);
     	// is Working
     }
 	

@@ -29,19 +29,55 @@ web3j를 전혀 사용하지 않은것은 아닙니다. hash등의 변환과 객
 - [ganache-cli](https://github.com/trufflesuite/ganache-cli)
 
 
-이 프로젝트의 목적은 JAVA Client에 있으므로 Smart Contract는 상대적으로 구현 및 테스트가 쉬운 Truffle 및 ganache-cli를 사용하였습니다.
+이 프로젝트의 목적은 JAVA Client에 있으므로 Smart Contract는 상대적으로 구현 및 테스트가 쉬운 truffle과 ganache-cli를 사용하였습니다.
 
 ---
 
 ## 테스트 순서
 
+
 ### 1. truffle 설치 후 ganache-cli 실행
+
+- ganache-cli는 ethereum server를 쉽게 구현 할 수 있게 해줍니다.
+
+1. node.js 설치 URL(https://nodejs.org/en/)
+2. truffle 설치 URL
+
+```bash
+npm install -g truffle
+```
+
+3. ganache-cli 설치
+
+```bash
+npm install -g ganache-cli
+```
+
+4. ganache-cli 실행
+
+```bash
+ganache-cli -d -m tutorial
+```
+
 
 ### 2. smart contract 컴파일 후 배포
 
-### 3. smart contract 주소 catch
+1. 이 프로젝트의 solidity 폴더를 다운로드 받은 후 truffle을 이용하여 컴파일 하여 정상임을 확인한다.
+    
+```bash
+truffle compile
+```
 
-### 4. spring boot로 테스트 진행
+2. ganache-cli로 서버가 로컬 서버가 올라가 있는 것을 확인 한 후 truffle을 이용하여 서버에 배포한다. 그리고 contract address를 꼭 복사하여 둔다.
+
+```bash
+truffle migrate
+```
+
+### 3. spring boot로 테스트 진행
+
+1. application.yml 파일열어서 복사해 둔 contract address 주소를 넣는다.
+2. 테스트를 진행한다.
 
 ---
 

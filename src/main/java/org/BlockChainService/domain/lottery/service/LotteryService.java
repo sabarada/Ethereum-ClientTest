@@ -142,6 +142,16 @@ public class LotteryService {
 				.build());
 	}
 
+	public String createFilter()
+	{
+		// BET : 0x100791de9f40bf2d56ffa6dc5597d2fd0b2703ea70bc7548cd74c04f5d215ab7
+		// WIN : 0x8219079e2d6c1192fb0ff7f78e6faaf5528ad6687e69749205d87bd4b156912b
+		// LOSE : 0x857de42f5f3a8f5de6cedde05ecd2843e3d33c293b4a75322a56e345f8bc75b4
+		// DRAW : 0x72ec2e949e4fad9380f9d5db3e2ed0e71cf22c51d8d66424508bdc761a3f4b0e
+		// REFUND : 0x59c0185881271a0f53d43e6ab9310091408f9e0ff9ae2512613de800f26b8de4 
+		
+	}
+	
 	
 	private String etherCall(Transaction transaction)
 	{	
