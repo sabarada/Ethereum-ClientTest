@@ -1,4 +1,4 @@
-package org.BlockChainService.domain.dto;
+package org.BlockChainService.domain.com.dto;
 
 import java.math.BigInteger;
 
@@ -127,6 +127,6 @@ public class Transaction {
 	public void setNonce(BigInteger nonce) {
 		this.nonce = nonce;
 	}
-    
-    
+	
+	
 }

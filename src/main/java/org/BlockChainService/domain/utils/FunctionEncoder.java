@@ -2,8 +2,8 @@ package org.BlockChainService.domain.utils;
 
 import java.util.List;
 
-import org.BlockChainService.domain.dto.Function;
-import org.BlockChainService.domain.dto.type.Address;
+import org.BlockChainService.domain.com.dto.Function;
+import org.BlockChainService.domain.com.dto.type.Address;
 
 /**
  * 
@@ -23,8 +23,9 @@ public class FunctionEncoder {
 		StringBuilder stringBuilder = new StringBuilder();
 		List<Object> objects = function.getInputParameters();
 		
-		stringBuilder.append(buildMethodHash(buildMethodSignature(function.getName(), objects)))
-					 .append(encodeParameters(objects));
+		stringBuilder.append(buildMethodHash(buildMethodSignature(function.getName(), objects)));
+		
+		if(objects != null) stringBuilder.append(encodeParameters(objects));
 		
 		return stringBuilder.toString();
 	}
@@ -51,17 +52,20 @@ public class FunctionEncoder {
 		stringBuilder.append(methodName)
 					 .append("(");
 		
-		int count = 0;
-		for(Object object : objects)
+		if(objects != null)
 		{
-			if(object instanceof Integer) stringBuilder.append("uint256");
-			if(object instanceof String) stringBuilder.append("string");
-			if(object instanceof Byte) stringBuilder.append("bytes1");
-			if(object instanceof Address) stringBuilder.append("address");
-			
-			if(count++ != objects.size() - 1) stringBuilder.append(",");
+			int count = 0;
+			for(Object object : objects)
+			{
+				if(object instanceof Integer) stringBuilder.append("uint256");
+				if(object instanceof String) stringBuilder.append("string");
+				if(object instanceof Byte) stringBuilder.append("bytes32");
+				if(object instanceof Address) stringBuilder.append("address");
+				
+				if(count++ != objects.size() - 1) stringBuilder.append(",");
+			}
 		}
-		 
+		
 		stringBuilder.append(")");
 		
 		return stringBuilder.toString();

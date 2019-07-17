@@ -1,4 +1,4 @@
-package org.BlockChainService.domain.dto.type;
+package org.BlockChainService.domain.com.dto.type;
 
 import java.math.BigInteger;
 

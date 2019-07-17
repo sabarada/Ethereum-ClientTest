@@ -1,4 +1,4 @@
-package org.BlockChainService.domain.dto;
+package org.BlockChainService.domain.com.dto;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;

@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import org.BlockChainService.domain.dto.type.Address;
+import org.BlockChainService.domain.com.dto.type.Address;
 
 public class ObjectEncoder {
 	

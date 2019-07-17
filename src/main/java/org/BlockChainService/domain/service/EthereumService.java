@@ -2,8 +2,8 @@ package org.BlockChainService.domain.service;
 
 import java.util.Collections;
 
-import org.BlockChainService.domain.dto.EthInputVO;
-import org.BlockChainService.domain.dto.EthResultVO;
+import org.BlockChainService.domain.com.dto.EthInputVO;
+import org.BlockChainService.domain.com.dto.EthResultVO;
 import org.BlockChainService.domain.utils.CommonUtils;
 import org.springframework.stereotype.Service;
 

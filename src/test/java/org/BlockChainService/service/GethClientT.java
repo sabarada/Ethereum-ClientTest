@@ -1,6 +1,6 @@
 package org.BlockChainService.service;
 
-import org.BlockChainService.domain.dto.EthInputVO;
+import org.BlockChainService.domain.com.dto.EthInputVO;
 import org.BlockChainService.domain.service.HttpService;
 import org.junit.Before;
 import org.junit.runner.RunWith;

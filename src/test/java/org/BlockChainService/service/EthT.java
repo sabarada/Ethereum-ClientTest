@@ -3,8 +3,8 @@ package org.BlockChainService.service;
 import java.io.IOException;
 import java.util.Collections;
 
-import org.BlockChainService.domain.dto.EthInputVO;
-import org.BlockChainService.domain.dto.EthResultVO;
+import org.BlockChainService.domain.com.dto.EthInputVO;
+import org.BlockChainService.domain.com.dto.EthResultVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

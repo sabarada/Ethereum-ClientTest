@@ -8,10 +8,10 @@ import static org.web3j.utils.Convert.toWei;
 
 import java.util.ArrayList;
 
-import org.BlockChainService.domain.dto.EthInputVO;
-import org.BlockChainService.domain.dto.EthResultVO;
-import org.BlockChainService.domain.dto.Function;
-import org.BlockChainService.domain.dto.Transaction;
+import org.BlockChainService.domain.com.dto.EthInputVO;
+import org.BlockChainService.domain.com.dto.EthResultVO;
+import org.BlockChainService.domain.com.dto.Function;
+import org.BlockChainService.domain.com.dto.Transaction;
 import org.BlockChainService.domain.utils.FunctionEncoder;
 import org.junit.Test;
 import org.junit.runner.RunWith;

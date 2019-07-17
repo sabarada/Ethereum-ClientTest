@@ -27,7 +27,7 @@ public class CommonUtils {
 	}
 	
 	/**
-	 * 
+	 * bytes array to hex string
 	 * @param input
 	 * @param offset
 	 * @param length

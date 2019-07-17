@@ -1,7 +1,7 @@
 package org.BlockChainService.domain.service;
 
-import org.BlockChainService.domain.dto.EthInputVO;
-import org.BlockChainService.domain.dto.EthResultInterface;
+import org.BlockChainService.domain.com.dto.EthInputVO;
+import org.BlockChainService.domain.com.dto.EthResultInterface;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,7 +31,8 @@ public class HttpService {
 	 * @param classes decide result format.
 	 * @return json data transferred from ethereum
 	 */	
-	public <T> T callGethFunction(String JSONInput, Class<T> classes) {
+	public <T> T callGethFunction(String JSONInput, Class<T> classes) 
+	{
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     

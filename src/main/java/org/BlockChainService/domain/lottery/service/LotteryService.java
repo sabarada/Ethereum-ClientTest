@@ -1,29 +1,24 @@
 package org.BlockChainService.domain.lottery.service;
 
-import static org.web3j.utils.Convert.toWei;
-
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.BlockChainService.domain.dto.EthInputVO;
-import org.BlockChainService.domain.dto.EthResultVO;
-import org.BlockChainService.domain.dto.Function;
-import org.BlockChainService.domain.dto.Transaction;
+import org.BlockChainService.domain.com.dto.EthInputVO;
+import org.BlockChainService.domain.com.dto.EthResultVO;
+import org.BlockChainService.domain.com.dto.Function;
+import org.BlockChainService.domain.com.dto.Transaction;
 import org.BlockChainService.domain.service.HttpService;
 import org.BlockChainService.domain.utils.CommonUtils;
 import org.BlockChainService.domain.utils.FunctionEncoder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.web3j.utils.Convert;
 
 @Service
 public class LotteryService {
 
-	private static final Logger logger = LoggerFactory.getLogger(LoggerFactory.class);
-	private String contractAddress = "0xe8aCCB4253bF6b4eCb81340082e16111c31d0954";
+	@Value("${ethereum.contract.address}")
+	private String contractAddress;
 	
 	@Autowired
 	private HttpService httpService;
@@ -34,15 +29,11 @@ public class LotteryService {
 	 */
 	public String getOwner()
 	{
-		String functionHash = "0x893d20e8";
-		
-		Transaction transaction = new Transaction.Builder()
+		return etherCall(
+				new Transaction.Builder()
 				.addTo(contractAddress)
-				.addData(functionHash)
-				.build();
-		
-		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_call", java.util.Arrays.asList(transaction, "latest"), EthResultVO.class);
-		return httpService.callGethFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult().substring(26);
+				.addData(FunctionEncoder.encode(new Function("getOwner")))
+				.build());
 	}
 	
 
@@ -57,58 +48,81 @@ public class LotteryService {
 		List<Object> list = new ArrayList<>();
 		list.add(challenges);
 		
-		Function function = new Function("bet", list);
-		String functionHash = FunctionEncoder.encode(function);
-	
-		Transaction transaction = new Transaction.Builder()
+		return etherCall(
+				new Transaction.Builder()
 				.addTo(contractAddress)
+				.addData(FunctionEncoder.encode(new Function("bet", list)))
 				.addFrom(from)
 				.addvalue(value)
-				.addData(functionHash)
-				.build();
-		
-		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_call", java.util.Arrays.asList(transaction, "latest"), EthResultVO.class);
-		return httpService.callGethFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult();
+				.build());
 	}
 
+	// distribute()
+	/**
+	 * distribute 
+	 * @return
+	 */
 	public String distribute()
 	{
-		return null;
+		return etherCall(
+				new Transaction.Builder()
+				.addTo(contractAddress)
+				.addData(FunctionEncoder.encode(new Function("distribute")))
+				.build());
 	}
 
-	public String isMatch()
+	
+	//betAndDistribute(byte challenges)
+	/**
+	 * 배팅 후 즉시 결과를 확인한다.
+	 * @param challenges
+	 * @param from
+	 * @param value
+	 * @return
+	 */
+	public String betAndDistribute(byte challenges, String from, String value)
 	{
-		return null;
+		List<Object> list = new ArrayList<>();
+		list.add(challenges);
+			
+		return etherCall(
+				new Transaction.Builder()
+				.addTo(contractAddress)
+				.addData(FunctionEncoder.encode(new Function("betAndDistribute", list)))
+				.addFrom(from)
+				.addvalue(value)
+				.build());
 	}
-
-
-	public String getBlockStatus()
+	
+	/**
+	 * 
+	 * @param answer
+	 * @return
+	 */
+	public String setAnswerForTest(byte answer)
 	{
-//		List<Object> list = new ArrayList<>();
-//		list.add(challenges);
-//		
-//		Function function = new Function("bet", list);
-//		String functionHash = FunctionEncoder.encode(function);
+		List<Object> list = new ArrayList<>();
+		list.add(answer);
 		
-		// need refactoring 
-//		byte[] bytearray = new byte[32];
-//		bytearray[31] = challenges;
-//		String parameterHash = CommonUtils.toHexString(bytearray, 0, bytearray.length, false);
-		
-//		String functionHash = "0x57720d71";
-//		String parameterHash = "";
-//		
-//		Transaction transaction = new Transaction.Builder()
-//				.addTo(contractAddress)
-//				.addData(functionHash + parameterHash)
-//				.build();
-//		
-//		System.out.println(transaction.toString());
-//		
-//		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_call", java.util.Arrays.asList(transaction, "latest"), EthResultVO.class);
-//		return httpService.callGethFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult();
-		
-		return null;
+		return etherCall(
+				new Transaction.Builder()
+				.addTo(contractAddress)
+				.addData(FunctionEncoder.encode(new Function("setAnswerForTest", list)))
+				.build());
+	}
+	
+	// getPot()
+	/**
+	 * get the pot money
+	 * @return 
+	 */
+	public String getPot()
+	{
+		return etherCall(
+				new Transaction.Builder()
+				.addTo(contractAddress)
+				.addData(FunctionEncoder.encode(new Function("getPot")))
+				.build());
 	}
 
 	/**
@@ -121,14 +135,16 @@ public class LotteryService {
 		List<Object> list = new ArrayList<>();
 		list.add(index);
 		
-		Function function = new Function("getBetInfo", list);
-		String functionHash = FunctionEncoder.encode(function);
-		
-		Transaction transaction = new Transaction.Builder()
+		return etherCall(
+				new Transaction.Builder()
 				.addTo(contractAddress)
-				.addData(functionHash)
-				.build();
-		
+				.addData(FunctionEncoder.encode(new Function("getBetInfo")))
+				.build());
+	}
+
+	
+	private String etherCall(Transaction transaction)
+	{	
 		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_call", java.util.Arrays.asList(transaction, "latest"), EthResultVO.class);	
 		return httpService.callGethFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult();
 	}
