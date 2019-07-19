@@ -2,10 +2,12 @@ package org.BlockChainService.domain.com.dto;
 
 import java.math.BigInteger;
 
+import org.BlockChainService.domain.com.dto.type.Params;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Transaction {
+public class Transaction implements Params{
 	public static final BigInteger DEFAULT_GAS = BigInteger.valueOf(9000);
 	
 	private String from;

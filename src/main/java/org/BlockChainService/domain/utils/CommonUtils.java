@@ -17,13 +17,18 @@ public class CommonUtils {
 	 */
 	public static String getJsonString(Object object)
 	{
+		if(object == null) 
+			new NullPointerException();
+			
+		String JsonString = null;
 		try {
-			return  objectMapper.writeValueAsString(object);
+			JsonString = objectMapper.writeValueAsString(object);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		
+		return JsonString;
 	}
 	
 	/**

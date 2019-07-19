@@ -1,13 +1,16 @@
 package org.BlockChainService.domain.com.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import org.BlockChainService.domain.com.dto.type.Params;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Filter{
+public class Filter implements Params{
 	
 	private List<FilterTopic<?>> topics;
 	
@@ -19,6 +22,12 @@ public class Filter{
 	public Filter addSingleTopic(String topic)
 	{
 		topics.add(new SingleTopic(topic));
+		return this;
+	}
+	
+	public Filter setNullTopic()
+	{
+		topics = Collections.emptyList();
 		return this;
 	}
 	

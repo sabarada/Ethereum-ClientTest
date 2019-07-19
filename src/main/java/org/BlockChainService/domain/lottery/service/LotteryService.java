@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.BlockChainService.domain.com.dto.EthInputVO;
 import org.BlockChainService.domain.com.dto.EthResultVO;
+import org.BlockChainService.domain.com.dto.EthResultVO_Event;
+import org.BlockChainService.domain.com.dto.Filter;
 import org.BlockChainService.domain.com.dto.Function;
 import org.BlockChainService.domain.com.dto.Transaction;
 import org.BlockChainService.domain.service.HttpService;
@@ -22,6 +24,12 @@ public class LotteryService {
 	
 	@Autowired
 	private HttpService httpService;
+
+	public static final String BET = "0x100791de9f40bf2d56ffa6dc5597d2fd0b2703ea70bc7548cd74c04f5d215ab7";
+	public static final String WIN = "0x8219079e2d6c1192fb0ff7f78e6faaf5528ad6687e69749205d87bd4b156912b";
+	public static final String LOSE = "0x857de42f5f3a8f5de6cedde05ecd2843e3d33c293b4a75322a56e345f8bc75b4";
+	public static final String DRAW = "0x72ec2e949e4fad9380f9d5db3e2ed0e71cf22c51d8d66424508bdc761a3f4b0e";
+	public static final String REFUND = "0x59c0185881271a0f53d43e6ab9310091408f9e0ff9ae2512613de800f26b8de4";
 	
 	/**
 	 * get the Contract owner address
@@ -29,11 +37,11 @@ public class LotteryService {
 	 */
 	public String getOwner()
 	{
-		return etherCall(
+		return httpService.etherCall(
 				new Transaction.Builder()
 				.addTo(contractAddress)
 				.addData(FunctionEncoder.encode(new Function("getOwner")))
-				.build());
+				.build(), HttpService.Method.ETH_CALL.getMethod());
 	}
 	
 
@@ -48,13 +56,15 @@ public class LotteryService {
 		List<Object> list = new ArrayList<>();
 		list.add(challenges);
 		
-		return etherCall(
+		return httpService.etherCall(
 				new Transaction.Builder()
 				.addTo(contractAddress)
 				.addData(FunctionEncoder.encode(new Function("bet", list)))
 				.addFrom(from)
+				.addTo(contractAddress)
 				.addvalue(value)
-				.build());
+				.addGas("0x12888")
+				.build(), HttpService.Method.ETH_SENDTRANSACTION.getMethod());
 	}
 
 	// distribute()
@@ -64,11 +74,11 @@ public class LotteryService {
 	 */
 	public String distribute()
 	{
-		return etherCall(
+		return httpService.etherCall(
 				new Transaction.Builder()
 				.addTo(contractAddress)
 				.addData(FunctionEncoder.encode(new Function("distribute")))
-				.build());
+				.build(), HttpService.Method.ETH_CALL.getMethod());
 	}
 
 	
@@ -85,13 +95,13 @@ public class LotteryService {
 		List<Object> list = new ArrayList<>();
 		list.add(challenges);
 			
-		return etherCall(
+		return httpService.etherCall(
 				new Transaction.Builder()
 				.addTo(contractAddress)
 				.addData(FunctionEncoder.encode(new Function("betAndDistribute", list)))
 				.addFrom(from)
 				.addvalue(value)
-				.build());
+				.build(), HttpService.Method.ETH_CALL.getMethod());
 	}
 	
 	/**
@@ -104,11 +114,11 @@ public class LotteryService {
 		List<Object> list = new ArrayList<>();
 		list.add(answer);
 		
-		return etherCall(
+		return httpService.etherCall(
 				new Transaction.Builder()
 				.addTo(contractAddress)
 				.addData(FunctionEncoder.encode(new Function("setAnswerForTest", list)))
-				.build());
+				.build(), HttpService.Method.ETH_SENDTRANSACTION.getMethod());
 	}
 	
 	// getPot()
@@ -118,11 +128,11 @@ public class LotteryService {
 	 */
 	public String getPot()
 	{
-		return etherCall(
+		return httpService.etherCall(
 				new Transaction.Builder()
 				.addTo(contractAddress)
 				.addData(FunctionEncoder.encode(new Function("getPot")))
-				.build());
+				.build(), HttpService.Method.ETH_CALL.getMethod());
 	}
 
 	/**
@@ -135,27 +145,31 @@ public class LotteryService {
 		List<Object> list = new ArrayList<>();
 		list.add(index);
 		
-		return etherCall(
+		return httpService.etherCall(
 				new Transaction.Builder()
 				.addTo(contractAddress)
 				.addData(FunctionEncoder.encode(new Function("getBetInfo")))
-				.build());
+				.build(), HttpService.Method.ETH_CALL.getMethod());
 	}
 
-	public String createFilter()
-	{
-		// BET : 0x100791de9f40bf2d56ffa6dc5597d2fd0b2703ea70bc7548cd74c04f5d215ab7
-		// WIN : 0x8219079e2d6c1192fb0ff7f78e6faaf5528ad6687e69749205d87bd4b156912b
-		// LOSE : 0x857de42f5f3a8f5de6cedde05ecd2843e3d33c293b4a75322a56e345f8bc75b4
-		// DRAW : 0x72ec2e949e4fad9380f9d5db3e2ed0e71cf22c51d8d66424508bdc761a3f4b0e
-		// REFUND : 0x59c0185881271a0f53d43e6ab9310091408f9e0ff9ae2512613de800f26b8de4 
-		
+	/**
+	 * 
+	 * @return
+	 */
+	public String newFilter()
+	{	
+	    return httpService.etherCall(
+	    		new Filter().addSingleTopic(LotteryService.BET)
+	    					.addSingleTopic(LotteryService.WIN)
+	    					.addSingleTopic(LotteryService.DRAW)
+	    					.addSingleTopic(LotteryService.LOSE)
+	    					.addSingleTopic(LotteryService.REFUND),
+	    		HttpService.Method.ETH_NEWFILTER.getMethod());
 	}
 	
 	
-	private String etherCall(Transaction transaction)
-	{	
-		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>("eth_call", java.util.Arrays.asList(transaction, "latest"), EthResultVO.class);	
-		return httpService.callGethFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult();
+	public String getLog()
+	{
+		return null;
 	}
 }

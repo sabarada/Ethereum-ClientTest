@@ -15,14 +15,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest
 public abstract class GethClientT {
 
-    protected HttpService web3jSampleService;
+    protected HttpService httpService;
     
     protected ObjectMapper objectMapper;
     
     @Before
     public void setup()
     {
-    	web3jSampleService = new HttpService();
+    	httpService = new HttpService();
     	objectMapper = new ObjectMapper();
     }
     
@@ -37,7 +37,7 @@ public abstract class GethClientT {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-        return (T)(web3jSampleService.callGethFunction(JSONInput, type));
+        return (T)(httpService.callEthFunction(JSONInput, type));
     }
 }
 

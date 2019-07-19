@@ -2,6 +2,10 @@ package org.BlockChainService.domain.service;
 
 import org.BlockChainService.domain.com.dto.EthInputVO;
 import org.BlockChainService.domain.com.dto.EthResultInterface;
+import org.BlockChainService.domain.com.dto.EthResultVO;
+import org.BlockChainService.domain.com.dto.Transaction;
+import org.BlockChainService.domain.com.dto.type.Params;
+import org.BlockChainService.domain.utils.CommonUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,6 +28,13 @@ public class HttpService {
 	
 	private static final String LOCAL = "http://127.0.0.1:8545";
 	
+	public String etherCall(Params transaction, String method)
+	{
+		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>(method, java.util.Arrays.asList(transaction), EthResultVO.class);
+		System.out.println(CommonUtils.getJsonString(gethInputVO));
+		return this.callEthFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult();
+	}	
+	
 	/**
 	 * service to communicate with ethereum
 	 * @param <T>
@@ -31,7 +42,7 @@ public class HttpService {
 	 * @param classes decide result format.
 	 * @return json data transferred from ethereum
 	 */	
-	public <T> T callGethFunction(String JSONInput, Class<T> classes) 
+	public <T> T callEthFunction(String JSONInput, Class<T> classes) 
 	{
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
@@ -41,4 +52,23 @@ public class HttpService {
     RestTemplate restTemplate = new RestTemplate();
     return (T) restTemplate.postForObject(LOCAL, param, classes);
     }
+	
+	
+	public enum Method{
+		ETH_CALL("eth_call"),
+		ETH_SENDTRANSACTION("eth_sendTransaction"),
+		ETH_NEWFILTER("eth_newFilter");
+		
+		private String method;
+		
+		Method(String value)
+		{
+			method = value;
+		}
+		
+		public String getMethod()
+		{
+			return method;
+		}
+	}
 }

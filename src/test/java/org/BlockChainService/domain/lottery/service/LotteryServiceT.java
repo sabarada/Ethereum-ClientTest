@@ -24,7 +24,7 @@ public class LotteryServiceT {
 	public void getOwnerT()
 	{
 		// given
-		String owner = "0xF76c9B7012c0A3870801eaAddB93B6352c8893DB";
+		String owner = "0xf76c9b7012c0a3870801eaaddb93b6352c8893db";
 		
 		// then
 		assertThat(lotteryService.getOwner(), is(owner));
@@ -34,26 +34,20 @@ public class LotteryServiceT {
 	public void betT()
 	{
 		// given
-		String from  = "0xF76c9B7012c0A3870801eaAddB93B6352c8893DB";
+		String from  = "0xf76c9b7012c0a3870801eaaddb93b6352c8893db";
 		String result = "0x0000000000000000000000000000000000000000000000000000000000000001";
 		String value = "0x" +  toWei("5", Convert.Unit.FINNEY).toBigInteger().toString(16);
 		byte challenges = 0x1b;
 		
 		// then
 		assertThat(lotteryService.bet(challenges, from, value), is(result));		
-		
-		// given_exception
-		value = "0x" +  toWei("1", Convert.Unit.FINNEY).toBigInteger().toString(16);
-		
-		// then_exception
-		assertThat(lotteryService.bet(challenges, from, value), is(nullValue()));
 	}
 
 	@Test
 	public void betAndDistributeT()
 	{
 		// given
-		String from  = "0xF76c9B7012c0A3870801eaAddB93B6352c8893DB";
+		String from  = "0x7d324dbc8fc704881d302da3b264e2243007bdba";
 		String result = "0x0000000000000000000000000000000000000000000000000000000000000001";
 		String value = "0x" +  toWei("5", Convert.Unit.FINNEY).toBigInteger().toString(16);
 		byte challenges = 0x1b;
@@ -71,25 +65,36 @@ public class LotteryServiceT {
 	@Test
 	public void distributeT()
 	{
-		//then
 		assertThat(lotteryService.distribute(), is(nullValue()) );
 	}
 	
 	@Test
 	public void setAnswerForT()
 	{
-		//then
+		//given
 		byte callenges = 0x1b;
+		
+		//when & then
 		assertThat(lotteryService.setAnswerForTest(callenges), is(notNullValue()) );
 	}
 	
 	@Test
 	public void getPotT()
 	{
-		// then
+		// when & then
 		assertThat(lotteryService.getPot(), is("0x0000000000000000000000000000000000000000000000000000000000000000"));
 	}
 	
+	@Test
+	public void newFilterT()
+	{
+		// when
+		String result = lotteryService.newFilter();
+		
+		// then
+		System.out.println(result);
+		assertThat(result, is(notNullValue()));
+	}
 				
 	@Test
 	public void getBetInfoT()

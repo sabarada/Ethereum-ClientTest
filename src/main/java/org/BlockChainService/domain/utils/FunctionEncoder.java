@@ -59,7 +59,7 @@ public class FunctionEncoder {
 			{
 				if(object instanceof Integer) stringBuilder.append("uint256");
 				if(object instanceof String) stringBuilder.append("string");
-				if(object instanceof Byte) stringBuilder.append("bytes32");
+				if(object instanceof Byte) stringBuilder.append("bytes1");
 				if(object instanceof Address) stringBuilder.append("address");
 				
 				if(count++ != objects.size() - 1) stringBuilder.append(",");
