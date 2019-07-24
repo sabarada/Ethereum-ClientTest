@@ -3,8 +3,11 @@ package org.BlockChainService.domain.service;
 import org.BlockChainService.domain.com.dto.EthInputVO;
 import org.BlockChainService.domain.com.dto.EthResultInterface;
 import org.BlockChainService.domain.com.dto.EthResultVO;
+import org.BlockChainService.domain.com.dto.EthResultVO_Event;
+import org.BlockChainService.domain.com.dto.Result;
 import org.BlockChainService.domain.com.dto.Transaction;
-import org.BlockChainService.domain.com.dto.type.Params;
+import org.BlockChainService.domain.com.dto.type.Method;
+import org.BlockChainService.domain.com.dto.type.Parameter;
 import org.BlockChainService.domain.utils.CommonUtils;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -28,12 +31,26 @@ public class HttpService {
 	
 	private static final String LOCAL = "http://127.0.0.1:8545";
 	
-	public String etherCall(Params transaction, String method)
+	public String etherCallReturnString(Parameter transaction, Method method)
 	{
-		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>(method, java.util.Arrays.asList(transaction), EthResultVO.class);
+		EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>(method.getMethod(), java.util.Arrays.asList(transaction), EthResultVO.class);
 		System.out.println(CommonUtils.getJsonString(gethInputVO));
 		return this.callEthFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult();
-	}	
+	}
+	
+	public Result[] etherCallReturnResultArray(Parameter transaction, Method method)
+	{
+		EthInputVO<?, EthResultVO_Event> gethInputVO = new EthInputVO<>(method.getMethod(), java.util.Arrays.asList(transaction), EthResultVO_Event.class);
+		System.out.println(CommonUtils.getJsonString(gethInputVO));
+		return this.callEthFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO_Event.class).getResult();
+	}
+	
+	public Result[] etherCallReturnResultArray(String[] transaction, Method method)
+	{
+		EthInputVO<?, EthResultVO_Event> gethInputVO = new EthInputVO<>(method.getMethod(), java.util.Arrays.asList(transaction), EthResultVO_Event.class);
+		System.out.println(CommonUtils.getJsonString(gethInputVO));
+		return this.callEthFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO_Event.class).getResult();
+	}
 	
 	/**
 	 * service to communicate with ethereum
@@ -52,23 +69,4 @@ public class HttpService {
     RestTemplate restTemplate = new RestTemplate();
     return (T) restTemplate.postForObject(LOCAL, param, classes);
     }
-	
-	
-	public enum Method{
-		ETH_CALL("eth_call"),
-		ETH_SENDTRANSACTION("eth_sendTransaction"),
-		ETH_NEWFILTER("eth_newFilter");
-		
-		private String method;
-		
-		Method(String value)
-		{
-			method = value;
-		}
-		
-		public String getMethod()
-		{
-			return method;
-		}
-	}
 }

@@ -49,6 +49,10 @@ public class FilterAndLogT extends GethClientT{
     	// then
     	assertThat(filterID, is(notNullValue()));
     	System.out.println(filterID);
+    
+    	
+    	// waiting for transcation commit in ethereum!!
+    	Thread.sleep(5000);
     	
     	// when [log]
     	EthInputVO<?, EthResultVO_Event> eth_getFilterChangesInput = new EthInputVO<>("eth_getTransactionReceipt", java.util.Arrays.asList(filterID), EthResultVO_Event.class);
@@ -58,6 +62,8 @@ public class FilterAndLogT extends GethClientT{
     	System.out.println(Arrays.toString(results));
     	assertThat(results.length, is(not(0)));
 	}
+	
+	
 	
 	//{"jsonrpc":"2.0","method":"eth_newFilter","params":["topics":topics]"id":7}
     @Test

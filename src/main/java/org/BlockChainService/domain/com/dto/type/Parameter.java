@@ -1,5 +1,5 @@
 package org.BlockChainService.domain.com.dto.type;
 
-public interface Params {
+public interface Parameter {
 
 }

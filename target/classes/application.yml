@@ -1,4 +1,7 @@
-ethereum:  
+ethereum:
+  server: 
+    ip: localhost
+    port: 8545
   contract:  
     address: "0x1e0de843cf81303fde693018bd25e6626db90f50"
     

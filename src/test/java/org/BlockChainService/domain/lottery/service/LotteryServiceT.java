@@ -6,6 +6,11 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.web3j.utils.Convert.toWei;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.BlockChainService.domain.com.dto.Result;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +39,12 @@ public class LotteryServiceT {
 	public void betT()
 	{
 		// given
-		String from  = "0xf76c9b7012c0a3870801eaaddb93b6352c8893db";
-		String result = "0x0000000000000000000000000000000000000000000000000000000000000001";
+		String from  = "0x7d324dbc8fc704881d302da3b264e2243007bdba";
 		String value = "0x" +  toWei("5", Convert.Unit.FINNEY).toBigInteger().toString(16);
 		byte challenges = 0x1b;
 		
 		// then
-		assertThat(lotteryService.bet(challenges, from, value), is(result));		
+		assertThat(lotteryService.bet(challenges, from, value), is(notNullValue()));		
 	}
 
 	@Test
@@ -95,7 +99,24 @@ public class LotteryServiceT {
 		System.out.println(result);
 		assertThat(result, is(notNullValue()));
 	}
-				
+	
+	@Test
+	public void getLogT()
+	{
+		List<String> filterId = new ArrayList<>();
+		filterId.add("0x564b595c733aa4700c00ca03549cef17");
+		
+		
+		// when
+		Result[] result = lotteryService.getLog(filterId.toArray(new String[0]));
+		
+		// then
+		System.out.println(Arrays.toString(result));
+		
+		assertThat(result, is(notNullValue()));
+	}
+	
+	
 	@Test
 	public void getBetInfoT()
 	{

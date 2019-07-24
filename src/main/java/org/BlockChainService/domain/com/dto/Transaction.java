@@ -2,12 +2,15 @@ package org.BlockChainService.domain.com.dto;
 
 import java.math.BigInteger;
 
-import org.BlockChainService.domain.com.dto.type.Params;
+import org.BlockChainService.domain.com.dto.type.Parameter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import lombok.Getter;
+
+@Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Transaction implements Params{
+public class Transaction implements Parameter{
 	public static final BigInteger DEFAULT_GAS = BigInteger.valueOf(9000);
 	
 	private String from;
@@ -84,51 +87,5 @@ public class Transaction implements Params{
         {
         	return new Transaction(this);
         }
-    }
-    
-    
-	public String getFrom() {
-		return from;
-	}
-	public void setFrom(String from) {
-		this.from = from;
-	}
-	public String getTo() {
-		return to;
-	}
-	public void setTo(String to) {
-		this.to = to;
-	}
-	public String getGas() {
-		return gas;
-	}
-	public void setGas(String gas) {
-		this.gas = gas;
-	}
-	public String getGasPrice() {
-		return gasPrice;
-	}
-	public void setGasPrice(String gasPrice) {
-		this.gasPrice = gasPrice;
-	}
-	public String getValue() {
-		return value;
-	}
-	public void setValue(String value) {
-		this.value = value;
-	}
-	public String getData() {
-		return data;
-	}
-	public void setData(String data) {
-		this.data = data;
-	}
-	public BigInteger getNonce() {
-		return nonce;
-	}
-	public void setNonce(BigInteger nonce) {
-		this.nonce = nonce;
-	}
-	
-	
+    }	
 }
