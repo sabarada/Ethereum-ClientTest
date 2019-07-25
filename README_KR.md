@@ -8,7 +8,7 @@ web3j를 사용하시기 전에 이 프로젝트를 먼저 사용하시면 web3j
 
 ## Simple Ethereum Json-RPC With Java Spring
 
-Ethereum의 Smart Contracdt는 JSON-RPC를 제공합니다. 해당문서는 여기에서 확인하실 수 있습니다. [here](https://github.com/ethereum/wiki/wiki/JSON-RPC)
+Ethereum의 Smart Contract는 JSON-RPC를 제공합니다. 해당문서는 여기에서 확인하실 수 있습니다. [here](https://github.com/ethereum/wiki/wiki/JSON-RPC)
 
 이 프로젝트는 위 통신 규약을 토대로  만들어진 기본 테스트 프로젝트입니다.
 
@@ -41,7 +41,7 @@ web3j를 전혀 사용하지 않은것은 아닙니다. hash등의 변환과 객
 - ganache-cli는 ethereum server를 쉽게 구현 할 수 있게 해줍니다.
 
 1. node.js 설치 URL(https://nodejs.org/en/)
-2. truffle 설치 URL
+2. truffle 설치
 
 ```bash
 npm install -g truffle
@@ -81,6 +81,6 @@ truffle migrate
 
 ---
 
-## 요약
-바쁘신 분들은 [code](./src/test/java/org/BlockChainService/service/GethwithmavenApplicationTests.java) 여기를 보시고 Ethereum과의 json-rpc 기본 방식을 익시히면 좋습니다.
+## Look
+바쁘신 분들은 [code](./src/test/java/org/BlockChainService/service/EthT.java) 여기를 보시고 Ethereum과의 json-rpc 기본 방식을 익시히면 좋습니다.
 
