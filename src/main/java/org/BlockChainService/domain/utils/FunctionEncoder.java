@@ -2,8 +2,8 @@ package org.BlockChainService.domain.utils;
 
 import java.util.List;
 
-import org.BlockChainService.domain.com.dto.Function;
-import org.BlockChainService.domain.com.dto.type.Address;
+import org.BlockChainService.domain.dto.Function;
+import org.BlockChainService.domain.dto.type.Address;
 
 /**
  * 

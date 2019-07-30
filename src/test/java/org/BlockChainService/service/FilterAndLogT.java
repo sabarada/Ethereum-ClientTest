@@ -9,11 +9,11 @@ import static org.web3j.utils.Convert.toWei;
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.BlockChainService.domain.com.dto.EthInputVO;
-import org.BlockChainService.domain.com.dto.EthResultVO;
-import org.BlockChainService.domain.com.dto.EthResultVO_Event;
-import org.BlockChainService.domain.com.dto.Filter;
-import org.BlockChainService.domain.com.dto.Result;
+import org.BlockChainService.domain.dto.EthInputVO;
+import org.BlockChainService.domain.dto.EthResultVO;
+import org.BlockChainService.domain.dto.EthResultVO_Event;
+import org.BlockChainService.domain.dto.Filter;
+import org.BlockChainService.domain.dto.Result;
 import org.BlockChainService.domain.lottery.service.LotteryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

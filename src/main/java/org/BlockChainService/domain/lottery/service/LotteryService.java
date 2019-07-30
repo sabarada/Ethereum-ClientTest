@@ -3,11 +3,11 @@ package org.BlockChainService.domain.lottery.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.BlockChainService.domain.com.dto.Filter;
-import org.BlockChainService.domain.com.dto.Function;
-import org.BlockChainService.domain.com.dto.Result;
-import org.BlockChainService.domain.com.dto.Transaction;
-import org.BlockChainService.domain.com.dto.type.Method;
+import org.BlockChainService.domain.dto.Filter;
+import org.BlockChainService.domain.dto.Function;
+import org.BlockChainService.domain.dto.Result;
+import org.BlockChainService.domain.dto.Transaction;
+import org.BlockChainService.domain.dto.type.Method;
 import org.BlockChainService.domain.service.HttpService;
 import org.BlockChainService.domain.utils.FunctionEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
