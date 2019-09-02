@@ -31,7 +31,7 @@ public class HttpService {
 	public String etherCallReturnString(Parameter transaction, Method method)
 	{
 		final EthInputVO<?, EthResultVO> gethInputVO = new EthInputVO<>(method.getMethod(), Arrays.asList(transaction), EthResultVO.class);
-		log.debug(CommonUtils.getJsonString(gethInputVO));
+		log.info(CommonUtils.getJsonString(gethInputVO));
 		return callEthFunction(CommonUtils.getJsonString(gethInputVO), EthResultVO.class).getResult();
 	}
 	
