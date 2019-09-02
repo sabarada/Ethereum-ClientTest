@@ -1,0 +1,12 @@
+ethereum:
+  server: 
+    ip: localhost
+    port: 8545
+  contract:  
+    address: "0x1e0de843cf81303fde693018bd25e6626db90f50"
+    
+    
+    
+    
+
+#curl http://127.0.0.1:8545 -X POST --data '{"jsonrpc":"2.0","method":"eth_getLogs","params":[{"topics":[],"address":"0x7d324dbc8fc704881d302da3b264e2243007bdba"}],"id":1,"responseType":"org.BlockChainService.domain.com.dto.EthResultVO_Event"}'
