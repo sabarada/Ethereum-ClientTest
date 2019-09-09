@@ -16,7 +16,7 @@ public class EthServiceTest {
     public void getEthClientVersionSync() throws Exception
     {
         HttpService httpService = new HttpService();
-        httpService
+
         Web3j web3j = Web3j.build(new HttpService());
         Web3ClientVersion web3ClientVersion = web3j.web3ClientVersion().send();
         System.out.println(web3ClientVersion.getWeb3ClientVersion());

@@ -5,9 +5,6 @@ contract Lottery
     address payable public owner;
     uint256 private _pot;
 
-    event SETPOT(uint256 _pot);
-    event GETOWNER(address indexed owner);
-
     constructor() public
     {
         owner = msg.sender;
@@ -25,13 +22,11 @@ contract Lottery
 
     function getOwner() public view returns(address)
     {
-        emit GETOWNER(owner);
         return owner;
     }
 
     function setPot(uint256 pot) public
     {
-        emit SETPOT(pot);
         _pot = pot;
     }
 }
