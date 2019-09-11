@@ -15,13 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class EthereumServiceTest {
 
-    @Autowired
-    EthereumService ethereumService;
 
     @Test
-    public void ethereumConnect() throws IOException, ExecutionException, InterruptedException {
-
-        ethereumService.ethereumConnectAsUser();
+    public void ethereumConnect() {
 
     }
 }

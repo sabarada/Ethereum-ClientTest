@@ -38,7 +38,7 @@ public class EthereumService {
         web3j = Admin.build(new HttpService()); // default server : http://localhost:8545
     }
 
-    public String ethCall(Function function) throws IOException {
+    public Object ethCall(Function function) throws IOException {
         // 1. Account Lock 해제
         PersonalUnlockAccount personalUnlockAccount = web3j.personalUnlockAccount(from, pwd).send();
 
@@ -59,7 +59,7 @@ public class EthereumService {
             System.out.println("getValue = " + decode.get(0).getValue());
             System.out.println("getType = " + decode.get(0).getTypeAsString());
 
-            return (String)decode.get(0).getValue();
+            return decode.get(0).getValue();
         }
         else
         {

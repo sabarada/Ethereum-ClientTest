@@ -1,6 +1,7 @@
 package personal.blockchain.domain.basic;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
@@ -21,7 +22,7 @@ public class BasicService{
         this.ethereumService = ethereumService;
     }
 
-    public String getPot() throws IOException, ExecutionException, InterruptedException {
+    public int getPot() throws IOException, ExecutionException, InterruptedException {
 
         // 1. 호출하고자 하는 function 세팅[functionName, parameters]
         Function function = new Function("getPot",
@@ -29,7 +30,7 @@ public class BasicService{
                                          Arrays.asList(new TypeReference<Uint256>() {}));
 
         // 2. ethereum을 function 변수로 통해 호출
-        return ethereumService.ethCall(function);
+        return ((BigInteger)ethereumService.ethCall(function)).intValue();
     }
 
     public void getNumber(int num)
